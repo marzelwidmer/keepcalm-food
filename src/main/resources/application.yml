@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: default
+#  application:
+#    name: @project.name@
+  jackson:
+    default-property-inclusion: non_null
+
+
+# yields {"build":{"version":"${project.version}"}} not actually resolving the variable, just printing the characters
+#info.build.version: ${version}
+
+
+---
+spring:
+  profiles: dev
+  data:
+    mongodb:
+      database: embeded_db
+      port: 27017
+---
+spring:
+  profiles: azure
+  data:
+    mongodb:
+      database: keepcalm
+      port: 10255
+      uri: mongodb://keepcalm:axJEXiv9JFiyPzHKY8hufzjyeRpGwzUuBJY0DJWk6oinNyoJdQKs614dqoczF3EHawPctnamdeGDpCwg0UbS0w==@keepcalm.documents.azure.com:10255/?ssl=true&replicaSet=globaldb
