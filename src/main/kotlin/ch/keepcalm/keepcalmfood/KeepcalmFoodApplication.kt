@@ -1,17 +1,30 @@
 package ch.keepcalm.keepcalmfood
 
+import com.fasterxml.jackson.annotation.JsonFilter
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.context.annotation.Configuration
 import org.springframework.hateoas.ResourceSupport
 import org.springframework.hateoas.mvc.ControllerLinkBuilder
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageConverter
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
+import org.springframework.http.converter.json.MappingJacksonValue
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport
 import java.util.*
+
+
+
+
 
 
 @SpringBootApplication
@@ -21,8 +34,22 @@ fun main(args: Array<String>) {
     runApplication<KeepcalmFoodApplication>(*args)
 }
 
+@Configuration
+internal class WebMvcConfiguration : WebMvcConfigurationSupport() {
+    companion object {
+        fun extendMessageConverters(converters: List<HttpMessageConverter<*>>?) {
+            for (converter in converters!!) {
+                if (converter is MappingJackson2HttpMessageConverter) {
+                    val mapper = converter.objectMapper
+                    mapper.setFilterProvider(SimpleFilterProvider().addFilter("foodFilter", SimpleBeanPropertyFilter.serializeAll()))
+                }
+            }
+        }
+    }
+}
 
 // Our domain object
+@JsonFilter("foodFilter")
 data class Food(
         val id: Int,
         val name: String,
@@ -52,7 +79,7 @@ class FoodLinkResource(val id: Int, val name: String) : ResourceSupport() {
     }
 }
 
-// Complete rest controller with list of sessions and detail urls
+// Complete rest controller with list of foods and detail urls
 @RestController
 class FoodController {
 
@@ -86,6 +113,20 @@ class FoodController {
             ResponseEntity<FoodResource>(null, HttpStatus.NOT_FOUND)
         else
             ResponseEntity.ok(FoodResource(food))
+    }
+
+
+
+    //http://localhost:8080/foods/634?fields=name
+    @GetMapping(value = ["/foods/{id}"], params  = ["fields"] )
+    fun getFoodsWithSomeFields(@PathVariable id: Int, @RequestParam fields: Array<String>): MappingJacksonValue {
+        val food = foods.find { f -> f.id.equals(id) }
+
+        val wrapper = MappingJacksonValue(food!!)
+        val filterProvider = SimpleFilterProvider().addFilter("foodFilter",
+                SimpleBeanPropertyFilter.filterOutAllExcept(*fields))
+        wrapper.filters = filterProvider
+        return wrapper
     }
 }
 
