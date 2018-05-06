@@ -5,6 +5,7 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder
 
 // Resource with link to available foods
 class FoodLinkResource(val id: Int, val name: String) : ResourceSupport() {
+
     constructor(s: Food) : this(s.id, s.name)
 
     init {

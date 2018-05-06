@@ -7,7 +7,7 @@ import java.util.*
 
 class HalResource : ResourceSupport() {
 
-    private val embedded = HashMap<String, Any>()
+    val embedded = HashMap<String, Any>()
 
     val embeddedResources: Map<String, Any>
         @JsonInclude(JsonInclude.Include.NON_EMPTY)

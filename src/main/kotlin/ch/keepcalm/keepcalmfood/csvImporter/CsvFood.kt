@@ -15,19 +15,16 @@ class CsvFood {
     var description: String? = null
     var food_group: String? = null
     var food_subgroup: String? = null
-    var food_type: String? = null
-
 
     constructor() {}
     constructor(id: String?, name: String?, name_scientific: String?,
-                description: String?, food_group: String?, food_subgroup: String?, food_type: String?) {
+                description: String?, food_group: String?, food_subgroup: String?) {
         this.id = id
         this.name = name
         this.name_scientific = name_scientific
         this.description = description
         this.food_group = food_group
         this.food_subgroup = food_subgroup
-        this.food_type = food_type
     }
 
     override fun toString(): String {
@@ -48,7 +45,7 @@ fun loadCSVFoods(): MutableList<CsvFood>? {
 
         val mappingStrategy = ColumnPositionMappingStrategy<CsvFood>()
         mappingStrategy.setType(CsvFood::class.java)
-        mappingStrategy.setColumnMapping("id", "name", "name_scientific", "description", "food_group", "food_subgroup", "food_type")
+        mappingStrategy.setColumnMapping("id", "name", "name_scientific", "description", "food_group", "food_subgroup")
 
         csvToBean = CsvToBeanBuilder<CsvFood>(fileReader)
                 .withMappingStrategy(mappingStrategy)

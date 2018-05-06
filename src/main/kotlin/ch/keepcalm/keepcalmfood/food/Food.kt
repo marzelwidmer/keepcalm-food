@@ -10,6 +10,5 @@ data class Food(
         val name_scientific: String,
         val description: String,
         val food_group: String,
-        val food_subgroup: String,
-        val food_type: String
+        val food_subgroup: String
 )
