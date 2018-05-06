@@ -1,8 +1,8 @@
 spring:
   profiles:
     active: default
-#  application:
-#    name: @project.name@
+  application:
+    name: @project.name@
   jackson:
     default-property-inclusion: non_null
 
