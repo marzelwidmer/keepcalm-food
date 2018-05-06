@@ -36,7 +36,7 @@ class Food {
     }
 }
 
-
+//http://javasampleapproach.com/kotlin/kotlin-how-to-read-write-csv-file-with-opencsv-example
 
 fun main(args: Array<String>?) {
 
@@ -44,7 +44,7 @@ fun main(args: Array<String>?) {
     var csvToBean: CsvToBean<Food>?
 
     try {
-        fileReader = BufferedReader(FileReader("src/main/resources/foods.csv"))
+        fileReader = BufferedReader(FileReader("src/main/resources/csv/foods.csv"))
 
         val mappingStrategy = ColumnPositionMappingStrategy<Food>()
         mappingStrategy.setType(Food::class.java)

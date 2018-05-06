@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 
-
 // Complete rest controller with list of foods and detail urls
 @RestController
 class FoodController {
