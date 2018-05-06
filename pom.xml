@@ -23,7 +23,10 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<kotlin.version>1.2.20</kotlin.version>
-	</properties>
+        <opencsv.version>4.1</opencsv.version>
+
+        <git-commit-id-plugin.version>2.2.4</git-commit-id-plugin.version>
+    </properties>
 
 	<dependencies>
 		<dependency>
@@ -58,7 +61,13 @@
         <dependency>
             <groupId>pl.project13.maven</groupId>
             <artifactId>git-commit-id-plugin</artifactId>
-            <version>2.2.4</version>
+            <version>${git-commit-id-plugin.version}</version>
+        </dependency>
+        <!-- cvs -->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>${opencsv.version}</version>
         </dependency>
 
 
