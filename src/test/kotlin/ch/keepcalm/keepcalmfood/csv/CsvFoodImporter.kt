@@ -1,34 +1,11 @@
-package ch.keepcalm.keepcalmfood
+package ch.keepcalm.keepcalmfood.csv
 
 import com.opencsv.bean.ColumnPositionMappingStrategy
 import com.opencsv.bean.CsvToBean
 import com.opencsv.bean.CsvToBeanBuilder
-import org.springframework.boot.CommandLineRunner
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-import org.springframework.context.annotation.Bean
 import java.io.BufferedReader
 import java.io.FileReader
 import java.io.IOException
-
-@SpringBootApplication
-class KeepcalmFoodApplication{
-
-    @Bean
-    fun init() = CommandLineRunner {
-       print("command runner....")
-        import()
-
-    }
-
-}
-
-fun main(args: Array<String>) {
-    runApplication<KeepcalmFoodApplication>(*args)
-}
-
-
-
 
 
 
@@ -61,13 +38,13 @@ class Food {
 
 
 
-fun import( ) {
+fun main(args: Array<String>?) {
 
     var fileReader: BufferedReader? = null
     var csvToBean: CsvToBean<Food>?
 
     try {
-        fileReader = BufferedReader(FileReader("foods.csv"))
+        fileReader = BufferedReader(FileReader("src/main/resources/foods.csv"))
 
         val mappingStrategy = ColumnPositionMappingStrategy<Food>()
         mappingStrategy.setType(Food::class.java)
@@ -95,5 +72,3 @@ fun import( ) {
         }
     }
 }
-
-
