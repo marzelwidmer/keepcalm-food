@@ -8,33 +8,33 @@ import java.io.FileReader
 import java.io.IOException
 
 
-
-class Food {
-    var id: String? = null
-    var name: String? = null
-    var name_scientific: String? = null
-    var description: String? = null
-    var food_group: String? = null
-    var food_subgroup: String? = null
-    var food_type: String? = null
-
-
-    constructor() {}
-    constructor(id: String?, name: String?, name_scientific: String?,
-                description: String?, food_group: String?, food_subgroup: String?, food_type: String?) {
-        this.id = id
-        this.name = name
-        this.name_scientific = name_scientific
-        this.description = description
-        this.food_group = food_group
-        this.food_subgroup = food_subgroup
-        this.food_type = food_type
-    }
-
-    override fun toString(): String {
-        return "Food [id=$id, name=$name]"
-    }
-}
+//
+//class Food {
+//    var id: String? = null
+//    var name: String? = null
+//    var name_scientific: String? = null
+//    var description: String? = null
+//    var food_group: String? = null
+//    var food_subgroup: String? = null
+//    var food_type: String? = null
+//
+//
+//    constructor() {}
+//    constructor(id: String?, name: String?, name_scientific: String?,
+//                description: String?, food_group: String?, food_subgroup: String?, food_type: String?) {
+//        this.id = id
+//        this.name = name
+//        this.name_scientific = name_scientific
+//        this.description = description
+//        this.food_group = food_group
+//        this.food_subgroup = food_subgroup
+//        this.food_type = food_type
+//    }
+//
+//    override fun toString(): String {
+//        return "Food [id=$id, name=$name]"
+//    }
+//}
 
 //http://javasampleapproach.com/kotlin/kotlin-how-to-read-write-csv-file-with-opencsv-example
 
@@ -44,11 +44,15 @@ fun main(args: Array<String>?) {
     var csvToBean: CsvToBean<Food>?
 
     try {
-        fileReader = BufferedReader(FileReader("src/main/resources/csv/foods.csv"))
+        fileReader = BufferedReader(FileReader("src/main/resources/csv/SwissFoodCompData-v5.3.csv"))
 
         val mappingStrategy = ColumnPositionMappingStrategy<Food>()
         mappingStrategy.setType(Food::class.java)
-        mappingStrategy.setColumnMapping("id", "name", "name_scientific", "description", "food_group", "food_subgroup", "food_type")
+
+
+        mappingStrategy.setColumnMapping("id", "name_de", "synonyms_de", "name_fr", "synonyms_fr", "name_it", "synonyms_it", "name_en", "synonyms_en",
+                "category_de", "category_fr", "category_it", "category_en",
+                "kcal", "fat", "protein")
 
         csvToBean = CsvToBeanBuilder<Food>(fileReader)
                 .withMappingStrategy(mappingStrategy)
@@ -72,3 +76,41 @@ fun main(args: Array<String>?) {
         }
     }
 }
+
+
+data class Food (
+
+    var id: Int? = null,
+    var name_de: String? = null,
+    var synonyms_de: String? = null,
+    var name_fr: String? = null,
+    var synonyms_fr: String? = null,
+    var name_it: String? = null,
+    var synonyms_it: String? = null,
+    var name_en: String? = null,
+    var synonyms_en: String? = null,
+    var category_de: String? = null,
+    var category_fr: String? = null,
+    var category_it: String? = null,
+    var category_en: String? = null,
+    var kcal: Int? = null,
+    var fat: Double? = null,
+    var protein: Double? = null
+)
+
+//    constructor() {}
+//    constructor(id: String?, name: String?, name_scientific: String?,
+//                description: String?, food_group: String?, food_subgroup: String?, food_type: String?) {
+//        this.id = id
+//        this.name = name
+//        this.name_scientific = name_scientific
+//        this.description = description
+//        this.food_group = food_group
+//        this.food_subgroup = food_subgroup
+//        this.food_type = food_type
+//    }
+//
+//    override fun toString(): String {
+//        return "Food [id=$id, name=$name]"
+//    }
+
