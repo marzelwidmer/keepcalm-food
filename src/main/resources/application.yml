@@ -6,9 +6,13 @@ spring:
   jackson:
     default-property-inclusion: non_null
 
-
-# yields {"build":{"version":"${project.version}"}} not actually resolving the variable, just printing the characters
-#info.build.version: ${version}
+## Info
+info:
+  build:
+    artifact: @project.artifactId@
+    name: @project.name@
+    description: @project.description@
+    version: @project.version@
 
 
 ---
