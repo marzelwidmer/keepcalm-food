@@ -5,7 +5,7 @@ import org.springframework.hateoas.mvc.ControllerLinkBuilder
 
 // Resource with self links
 class FoodResource(
-        var id: Int,
+        var id: String,
         var name: String,
         var synonyms: String? = null,
         var category: String? = null,
@@ -15,7 +15,7 @@ class FoodResource(
 ) : ResourceSupport() {
 
     constructor(f: Food) : this(
-            f.id!!, f.name!!, f.synonyms, f.category, f.kcal, f.fat, f.protein
+            f.id, f.name!!, f.synonyms, f.category, f.kcal, f.fat, f.protein
     )
 
     init {

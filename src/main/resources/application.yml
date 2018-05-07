@@ -14,14 +14,13 @@ info:
     description: @project.description@
     version: @project.version@
 
-
 ---
 spring:
   profiles: dev
   data:
     mongodb:
-      database: embeded_db
-      port: 27017
+      database: keepcalm-foods
+      port: 32768
 ---
 spring:
   profiles: azure
