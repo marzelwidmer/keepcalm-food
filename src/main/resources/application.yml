@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: default
+    active: azure
   application:
     name: @project.name@
   jackson:
@@ -8,6 +8,7 @@ spring:
 
 ## Info
 info:
+  profile : ${spring.profiles.active}
   build:
     artifact: @project.artifactId@
     name: @project.name@
