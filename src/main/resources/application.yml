@@ -1,6 +1,7 @@
 spring:
   profiles:
-    active: default
+#    active: default
+#    active: @spring.profiles.active@
   application:
     name: @project.name@
   jackson:
