@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: azure
+    active: @spring.profiles.active@
   application:
     name: @project.name@
   jackson:
