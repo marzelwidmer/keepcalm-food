@@ -15,7 +15,7 @@ class KeepcalmFoodApplication(val foodService: FoodService, val foodRepository: 
     @Bean
     fun init() = CommandLineRunner {
         val count = foodRepository.count()
-        println("found $count records in database after db load")
+        println("found $count records in database")
     }
 }
 
@@ -25,13 +25,14 @@ fun main(args: Array<String>) {
 
 @Component
 @Profile("dev")
-class DevDatabaseLoader(val foodService: FoodService, val foodRepository: FoodRepository){
+class DevDatabaseLoader(val foodService: FoodService, val foodRepository: FoodRepository) {
 
-      init{
+    init {
+        println("load database....")
         foodService.loadDatabase()
         val count = foodRepository.count()
-        println("found $count records in database after db load")
-      }
+        println("... found $count records in database after db load")
+    }
 
 }
 
