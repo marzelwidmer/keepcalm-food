@@ -1,13 +1,11 @@
 spring:
   profiles:
-#    active: default
-#    active: @spring.profiles.active@
+    active: @spring.profiles.active@
   application:
     name: @project.name@
   jackson:
     default-property-inclusion: non_null
 
-## Info
 info:
   profile : ${spring.profiles.active}
   build:

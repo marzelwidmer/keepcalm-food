@@ -5,6 +5,7 @@ import ch.keepcalm.keepcalmfood.food.FoodRepository
  import com.opencsv.bean.ColumnPositionMappingStrategy
 import com.opencsv.bean.CsvToBean
 import com.opencsv.bean.CsvToBeanBuilder
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,6 +18,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
+@Ignore
 @RunWith(SpringRunner::class)
 @SpringBootTest
 class KeepcalmFoodApplicationTests {
