@@ -42,6 +42,7 @@ class FoodController(val foodService: FoodService) {
     }
 
 
+
     //http://localhost:8080/foods/634?fields=name
     @GetMapping(value = ["/foods/{id}"], params = ["fields"])
     fun getFoodsWithSomeFields(@PathVariable id: String, @RequestParam fields: Array<String>): MappingJacksonValue {

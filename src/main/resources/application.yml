@@ -1,10 +1,14 @@
 spring:
-  profiles:
-    active: @spring.profiles.active@
   application:
     name: @project.name@
   jackson:
     default-property-inclusion: non_null
+  data:
+    mongodb:
+      database: keepcalm
+      port: 10255
+      uri: mongodb://keepcalm:axJEXiv9JFiyPzHKY8hufzjyeRpGwzUuBJY0DJWk6oinNyoJdQKs614dqoczF3EHawPctnamdeGDpCwg0UbS0w==@keepcalm.documents.azure.com:10255/?ssl=true&replicaSet=globaldb
+
 
 info:
   profile : ${spring.profiles.active}
@@ -21,11 +25,3 @@ spring:
     mongodb:
       database: keepcalm-foods
       port: 32768
----
-spring:
-  profiles: azure
-  data:
-    mongodb:
-      database: keepcalm
-      port: 10255
-      uri: mongodb://keepcalm:axJEXiv9JFiyPzHKY8hufzjyeRpGwzUuBJY0DJWk6oinNyoJdQKs614dqoczF3EHawPctnamdeGDpCwg0UbS0w==@keepcalm.documents.azure.com:10255/?ssl=true&replicaSet=globaldb
