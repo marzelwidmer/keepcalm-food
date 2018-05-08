@@ -10,12 +10,6 @@ class FoodService (val foodRepository: FoodRepository){
         return foodRepository.findAll()
     }
 
-
-    fun loadDatabase (){
-        val foods = cvsToFoodList()
-        foods?.map { food -> foodRepository.save(food) }
-    }
-
     fun findOne(id: String): Food {
         val food: Food = foodRepository.findById(id).get()
         return food

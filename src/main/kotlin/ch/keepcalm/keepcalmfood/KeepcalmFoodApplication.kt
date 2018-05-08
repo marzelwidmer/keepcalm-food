@@ -23,17 +23,3 @@ fun main(args: Array<String>) {
     runApplication<KeepcalmFoodApplication>(*args)
 }
 
-@Component
-@Profile("dev")
-class DevDatabaseLoader(val foodService: FoodService, val foodRepository: FoodRepository) {
-
-    init {
-        println("load database....")
-        foodService.loadDatabase()
-        val count = foodRepository.count()
-        println("... found $count records in database after db load")
-    }
-
-}
-
-
