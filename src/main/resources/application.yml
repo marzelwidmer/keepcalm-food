@@ -7,7 +7,7 @@ spring:
     mongodb:
       database: keepcalm
       port: 10255
-      uri: mongodb://keepcalm:axJEXiv9JFiyPzHKY8hufzjyeRpGwzUuBJY0DJWk6oinNyoJdQKs614dqoczF3EHawPctnamdeGDpCwg0UbS0w==@keepcalm.documents.azure.com:10255/?ssl=true&replicaSet=globaldb
+      uri: mongodb://${mongo.user}:${mongo.password}@${mongo.database}
 
 
 info:
