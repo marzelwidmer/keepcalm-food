@@ -77,6 +77,9 @@ Update deployment
 
 
 
+
+
+
 Docker push image
 -
 `mvn package docker:build -DpushImage`
@@ -94,7 +97,9 @@ Tag image lastes with v2
 -
 `mvn package docker:build -DpushImageTags -DdockerImageTags=latest -DdockerImageTags=v2`
 
+Push to docker
 
+`docker push keepcalmregistry.azurecr.io/keepcalm-food:v2`
 
 
 Deploy

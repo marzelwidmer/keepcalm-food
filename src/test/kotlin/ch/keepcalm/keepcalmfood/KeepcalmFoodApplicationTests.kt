@@ -5,32 +5,17 @@ import ch.keepcalm.keepcalmfood.food.FoodRepository
  import com.opencsv.bean.ColumnPositionMappingStrategy
 import com.opencsv.bean.CsvToBean
 import com.opencsv.bean.CsvToBeanBuilder
-import org.junit.Ignore
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Profile
 import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
-import org.springframework.test.context.junit4.SpringRunner
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-@Ignore
-@RunWith(SpringRunner::class)
-@SpringBootTest
-class KeepcalmFoodApplicationTests {
-
-	@Test
-	fun contextLoads() {
-	}
-}
-
 
 @Component
-@Profile("dev")
+@Profile("mlab")
 class DevDatabaseLoader(val foodServiceImporter: FoodServiceImporter, val foodRepository: FoodRepository) {
 
 	init {
