@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: keepcalm-food
+  labels:
+    purpose: keepcalm-food-envars
+spec:
+  containers:
+  - name: keepcalm-food
+    image: keepcalmregistry.azurecr.io/keepcalm-food:latest
+    env:
+    - name: MONGO_HOST
+      value: "keepcalm.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"
+    - name: MONGO_USER
+      value: "keepcalm"
+    - name: MONGO_PASSWORD
+      value: "axJEXiv9JFiyPzHKY8hufzjyeRpGwzUuBJY0DJWk6oinNyoJdQKs614dqoczF3EHawPctnamdeGDpCwg0UbS0w=="

@@ -7,7 +7,7 @@ spring:
     mongodb:
       database: keepcalm
       port: 10255
-      uri: mongodb://${mongo.user}:${mongo.password}@${mongo.database}
+      uri: mongodb://${mongo.user}:${mongo.password}@${mongo.host}
 
 
 info:

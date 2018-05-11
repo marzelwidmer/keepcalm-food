@@ -8,12 +8,12 @@ ENV JAVA_OPTS=""
 ENV SPRING_PROFILE="default"
 ENV MONGO_USER=""
 ENV MONGO_PASSWORD=""
-ENV MONGO_DATABASE=""
+ENV MONGO_HOST=""
 
 ENTRYPOINT exec java $JAVA_OPTS \
  -Djava.security.egd=file:/dev/./urandom \
  -Dspring.profiles.active=$SPRING_PROFILE \
  -Dmongo.user=$MONGO_USER \
  -Dmongo.password=$MONGO_PASSWORD \
- -Dmongo.database=$MONGO_DATABASE \
+ -Dmongo.host=$MONGO_HOST \
  -jar app.jar
