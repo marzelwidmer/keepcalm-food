@@ -3,13 +3,6 @@ spring:
     name: @project.name@
   jackson:
     default-property-inclusion: non_null
-  data:
-    mongodb:
-      database: keepcalm
-      port: 10255
-      uri: mongodb://${mongo.user}:${mongo.password}@${mongo.host}
-
-
 info:
   profile : ${spring.profiles.active}
   build:
@@ -25,3 +18,21 @@ spring:
     mongodb:
       database: keepcalm-foods
       port: 32768
+---
+spring:
+  profiles: mlab
+  data:
+    mongodb:
+      database: ${mongo.database}
+      port: ${mongo.port}
+      host: ${mongo.host}
+      username: ${mongo.user}
+      password: ${mongo.password}
+---
+spring:
+  profiles: azure
+  data:
+    mongodb:
+      database: ${mongo.database}
+      port: ${mongo.port}
+      uri: mongodb://${mongo.database}:${mongo.password}@${mongo.host}:${mongo.port}/?ssl=true&replicaSet=globaldb

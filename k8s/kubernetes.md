@@ -8,21 +8,27 @@ kubernetes
 Deployment
 -
 Create deployment 
-`kubectl create -f ./k8s/deployment.yml`
+
+`kubectl create -f ./k8s/deployment-azure.yml`
 
 Get the deployments
+
 `kubectl get deployment`
 
 View deployment
+
 `kubectl describe deployment keepcalm-food`
 
 Check if service AlreadyExists
+
 `kubectl get service keepcalm-food`
 
 otherwise create one.
+
 `kubectl expose deployment keepcalm-food --type=LoadBalancer --port=80 --target-port=8080`
 
 Check _pods_ 
+
 `kubectl get pods -l app=keepcalm-food`
 
 
@@ -31,28 +37,40 @@ Check _pods_
 Update the version of the app https://kubernetes.io/docs/tutorials/kubernetes-basics/update-interactive/
 -
 To list your deployments use the get deployments command: 
+
 `kubectl get deployments`
 
 To list the running Pods use the get pods command:
+
 `kubectl get pods`
 
 To view the current image version of the app, run a describe command against the Pods (look at the Image field):
+
 `kubectl describe pods`
 
 To update the image of the application to version 2, use the set image command, followed by the deployment name and the new image version:
+
 `kubectl set image deployments/keepcalm-food keepcalm-food=keepcalmregistry.azurecr.io/keepcalm-food:v2`
 
 Check the status of the new Pods
+
 `kubectl get pods`
 
 Check if App is runing
+
 `kubectl describe services/keepcalm-food`
 
 kubectl rollout status 
+
 `kubectl rollout status deployments/keepcalm-food`
 
 Check current image
+
 `kubectl describe pods`
+
+Update deployment
+
+`kubectl apply -f ./k8s/deployment-mlab-v2.yml`
 
 
 
