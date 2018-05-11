@@ -3,6 +3,7 @@ spring:
     name: @project.name@
   jackson:
     default-property-inclusion: non_null
+
 info:
   profile : ${spring.profiles.active}
   build:
@@ -18,6 +19,7 @@ spring:
     mongodb:
       database: keepcalm-foods
       port: 32768
+
 ---
 spring:
   profiles: mlab
@@ -28,6 +30,7 @@ spring:
       host: ${mongo.host}
       username: ${mongo.user}
       password: ${mongo.password}
+
 ---
 spring:
   profiles: azure

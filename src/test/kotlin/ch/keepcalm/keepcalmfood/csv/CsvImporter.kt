@@ -1,6 +1,5 @@
 package ch.keepcalm.keepcalmfood.csv
 
-import ch.keepcalm.keepcalmfood.food.Food
 import com.opencsv.bean.ColumnPositionMappingStrategy
 import com.opencsv.bean.CsvToBean
 import com.opencsv.bean.CsvToBeanBuilder

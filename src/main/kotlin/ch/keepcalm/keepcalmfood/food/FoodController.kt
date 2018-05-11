@@ -4,7 +4,6 @@ import ch.keepcalm.keepcalmfood.HalResource
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider
 import org.springframework.hateoas.mvc.ControllerLinkBuilder
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.ok
 import org.springframework.http.converter.json.MappingJacksonValue
@@ -35,10 +34,7 @@ class FoodController(val foodService: FoodService) {
     @GetMapping(value = ["/foods/{id}"])
     fun getFood(@PathVariable id: String): ResponseEntity<FoodResource> {
         val food = foodService.findOne(id)
-        return if (food == null)
-            ResponseEntity<FoodResource>(HttpStatus.NOT_FOUND)
-        else
-            ResponseEntity.ok(FoodResource(food))
+         return ResponseEntity.ok(FoodResource(food))
     }
 
 
@@ -48,7 +44,7 @@ class FoodController(val foodService: FoodService) {
     fun getFoodsWithSomeFields(@PathVariable id: String, @RequestParam fields: Array<String>): MappingJacksonValue {
         val food = foodService.findOne(id)
 
-        val wrapper = MappingJacksonValue(food!!)
+        val wrapper = MappingJacksonValue(food)
         val filterProvider = SimpleFilterProvider().addFilter("foodFilter",
                 SimpleBeanPropertyFilter.filterOutAllExcept(*fields))
         wrapper.filters = filterProvider

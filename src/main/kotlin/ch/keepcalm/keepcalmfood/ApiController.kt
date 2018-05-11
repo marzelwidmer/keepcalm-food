@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ApiController {
 
-    @GetMapping (value = ["/"])
+    @GetMapping (value = ["/api"])
     fun getApiIndex() : ResourceSupport {
         val resource = ResourceSupport()
         resource.add(linkTo(methodOn(FoodController::class.java).getFoods()).withRel("foods"))
