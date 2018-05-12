@@ -5,6 +5,103 @@ Kubernetes
 
 `kubectl get pods`
 
+
+
+Docker
+-
+`mvn package docker:build -DpushImage`
+
+If: Exception caught: unauthorized: authentication required
+make it sep by step
+
+- login
+
+    `docker login -u <username> -p <password> keepcalmregistry.azurecr.io`
+
+- push
+
+    `docker push keepcalmregistry.azurecr.io/keepcalm-food:latest`
+
+
+
+
+Secret keepcalm-food
+-
+- create base63 encoded username
+
+    `echo <username> | base64`
+
+- create base64 encoded password
+
+    `echo <password> | base64`
+
+- Copy the vaule in keepcalm-food-secret.yml create a generic secret from YML file
+    `kubectl create -f keepcalm-food-secret.yml`
+ 
+- View inforamtion about the Secret
+ 
+    `kubectl get secret keepcalm-food-secret`
+
+    - Details about the Secret
+
+        `kubectl describe secret keepcalm-food-secret`
+
+
+Secret POD
+-
+`kubectl create -f keepcalm-food-secret-pod.yml`
+
+- Verify your POD
+
+    `kubectl get pod keepcalm-food-secret-pod`
+
+- Access the Secret in the POD
+
+    `kubectl exec -it keepcalm-food-secret-pod /bin/sh`
+    
+    Show environment
+
+    `env`
+
+-  Clean Up Secrets
+
+    `kubectl delete -f keepcalm-food-secret.yml -f keepcalm-food-secret-pod.yml`
+
+
+keepcalm-food POD
+-
+`kubectl create -f keepcalm-food-pod.yml`
+
+Deployment 
+-
+
+`kubectl create -f keepcalm-food-deployment.yml`
+
+- View deployment
+
+    `kubectl describe deployment keepcalm-food`
+
+- Expose deployment
+
+    `kubectl expose deployment keepcalm-food --type=LoadBalancer --port=80 --target-port=8080`
+
+
+- Update deployment
+
+    `kubectl apply -f deployment-mlab-v2.yml`
+
+- Redepoy
+
+    `kubectl replace --force -f  mlab-pod.yaml`
+ 
+
+
+
+
+
+
+
+
 Deployment
 -
 Create deployment 
@@ -72,7 +169,6 @@ Update deployment
 
 `kubectl apply -f deployment-mlab-v2.yml`
 
-
 Redepoy
 `kubectl replace --force -f  mlab-pod.yaml`
  
@@ -83,71 +179,11 @@ Redepoy
 
 
 
-Secret mLab
--
-create base63 encoded username
-`echo mongoDbUser | base64`
-
-create base64 encoded password
-`echo EWjELjkj%HT]DmzkREwMEpMsGK% | base64`
-
-Copy the vaule in mlab-secret.yml
-create a generic secret from YML file
-`kubectl create -f mlab-secret.yml`
- 
-View inforamtion about the Secret
- 
-`kubectl get secret mlab-secret`
-
-Details about the Secret
-
-'kubectl describe secret mlab-secret'
- 
- 
-Create Secret POD
--
-`kubectl create -f mlab-secret-pod.yml`
-
-Verify your POD
-
-`kubectl get pod mlab-secret-pod`
-
-Access the Secret in the POD
-`kubectl exec -it mlab-secret-env-pod /bin/sh`
-
-`env`
 
 
 
 
 
-
-Clean Up Secret mLab
--
-`kubectl delete -f mlab-secret.yml -f mlab-secret-pod.yml`
-
-
-
-
-
-
-
-
-
-
-Docker push image
--
-`mvn package docker:build -DpushImage`
-
-If: Exception caught: unauthorized: authentication required
-make it sep by step
-
-
-Docker login and Push
--
-`docker login -u keepcalmregistry -p "N/0o1mNRdg=htJA/4MhwkDtIRX7KGH6m" keepcalmregistry.azurecr.io`
-
-`docker push keepcalmregistry.azurecr.io/keepcalm-food`
 
 Tag image lastes with v2
 -
