@@ -38,8 +38,8 @@ Secret keepcalm-food
 
     `echo <password> | base64`
 
-- Copy the vaule in keepcalm-food-secret.yml create a generic secret from YML file
-    `kubectl create -f keepcalm-food-secret.yml`
+- Copy the vaule in keepcalm-food-secret.yaml create a generic secret from YML file
+    `kubectl create -f keepcalm-food-secret.yaml`
  
 - View inforamtion about the Secret
  
@@ -52,7 +52,7 @@ Secret keepcalm-food
 
 Secret POD
 -
-`kubectl create -f keepcalm-food-secret-pod.yml`
+`kubectl create -f keepcalm-food-secret-pod.yaml`
 
 - Verify your POD
 
@@ -68,17 +68,17 @@ Secret POD
 
 -  Clean Up Secrets
 
-    `kubectl delete -f keepcalm-food-secret.yml -f keepcalm-food-secret-pod.yml`
+    `kubectl delete -f keepcalm-food-secret.yaml -f keepcalm-food-secret-pod.yaml`
 
 
 keepcalm-food POD
 -
-`kubectl create -f keepcalm-food-pod.yml`
+`kubectl create -f keepcalm-food-pod.yaml`
 
 Deployment 
 -
 
-`kubectl create -f keepcalm-food-deployment.yml`
+`kubectl create -f keepcalm-food-deployment.yaml`
 
 - View deployment
 
@@ -90,19 +90,29 @@ Deployment
 
 
 - Update deployment
+    how to make Deployment to update image
+    
+    `kubectl edit deployment keepcalm-food`
 
-    `kubectl apply -f keepcalm-food-deployment.yml`
+    
 
 - Redepoy
+    `kubectl apply -f keepcalm-food-deployment.yaml`
 
-    `kubectl replace --force -f keepcalm-food-deployment.yml`
+    `kubectl replace --force -f keepcalm-food-deployment.yaml`
+    
+    when not changing the container image name or tag you would just scale your application to 0 and back to the original size with sth like:
+
+    `kubectl scale --replicas=0 deployment keepcalm-food`
+
+    `kubectl scale --replicas=1 deployment keepcalm-food`
  
+- Get the image ID of image by tag on Kubernetes deployment
+
+    `kubectl get pod --namespace=default keepcalm-food-pod -o json | jq '.status.containerStatuses[] | { "image": .image, "imageID": .imageID }'`
 
 
-
-
-
-
+ 
 
 
 

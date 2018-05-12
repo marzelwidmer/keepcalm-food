@@ -13,11 +13,7 @@ class App : RComponent<RProps, RState>() {
                 +"Welcome to keepcalm-food "
             }
         }
-        p("App-intro") {
-            +"To get started, edit "
-            code { +"app/App.kt" }
-            +" and save to reload."
-        }
+
         p("App-ticker") {
             ticker()
         }
