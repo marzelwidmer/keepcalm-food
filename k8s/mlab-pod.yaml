@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+
+metadata:
+  name: keepcalm-food-mlab-pod
+  labels:
+    app: keepcalm-food
+spec:
+  containers:
+  - image: keepcalmregistry.azurecr.io/keepcalm-food:v2
+    name: keepcalm-food
+    env:
+    - name: MONGO_USER
+      valueFrom:
+        secretKeyRef:
+          name: mlab-secret
+          key: username
+    - name: MONGO_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mlab-secret
+          key: password
+    - name: SPRING_PROFILE
+      value: "mlab"
+    - name: MONGO_DATABASE
+      value: "keepcalm-foods"
+    - name: MONGO_HOST
+      value: "ds147454.mlab.com"
+    - name: MONGO_PORT
+      value: "47454"
+    ports:
+      - containerPort: 8080

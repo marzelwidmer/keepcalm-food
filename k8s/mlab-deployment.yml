@@ -1,0 +1,44 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: keepcalm-food
+  labels:
+    app: keepcalm-food
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keepcalm-food-mlab
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: keepcalm-food
+        tier: backend
+    spec:
+      containers:
+        - image: keepcalmregistry.azurecr.io/keepcalm-food:v2
+          name: keepcalm-food
+          env:
+          - name: MONGO_USER
+            valueFrom:
+              secretKeyRef:
+                name: mlab-secret
+                key: username
+          - name: MONGO_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mlab-secret
+                key: password
+          - name: SPRING_PROFILE
+            value: "mlab"
+          - name: MONGO_DATABASE
+            value: "keepcalm-foods"
+          - name: MONGO_HOST
+            value: "ds147454.mlab.com"
+          - name: MONGO_PORT
+            value: "47454"
+          ports:
+            - containerPort: 8080
+

@@ -9,7 +9,7 @@ Deployment
 -
 Create deployment 
 
-`kubectl create -f ./k8s/deployment-azure.yml`
+`kubectl create -f deployment-azure.yml`
 
 Get the deployments
 
@@ -70,7 +70,62 @@ Check current image
 
 Update deployment
 
-`kubectl apply -f ./k8s/deployment-mlab-v2.yml`
+`kubectl apply -f deployment-mlab-v2.yml`
+
+
+Redepoy
+`kubectl replace --force -f  mlab-pod.yaml`
+ 
+
+
+
+
+
+
+
+Secret mLab
+-
+create base63 encoded username
+`echo mongoDbUser | base64`
+
+create base64 encoded password
+`echo EWjELjkj%HT]DmzkREwMEpMsGK% | base64`
+
+Copy the vaule in mlab-secret.yml
+create a generic secret from YML file
+`kubectl create -f mlab-secret.yml`
+ 
+View inforamtion about the Secret
+ 
+`kubectl get secret mlab-secret`
+
+Details about the Secret
+
+'kubectl describe secret mlab-secret'
+ 
+ 
+Create Secret POD
+-
+`kubectl create -f mlab-secret-pod.yml`
+
+Verify your POD
+
+`kubectl get pod mlab-secret-pod`
+
+Access the Secret in the POD
+`kubectl exec -it mlab-secret-env-pod /bin/sh`
+
+`env`
+
+
+
+
+
+
+Clean Up Secret mLab
+-
+`kubectl delete -f mlab-secret.yml -f mlab-secret-pod.yml`
+
 
 
 
@@ -86,6 +141,7 @@ Docker push image
 
 If: Exception caught: unauthorized: authentication required
 make it sep by step
+
 
 Docker login and Push
 -
