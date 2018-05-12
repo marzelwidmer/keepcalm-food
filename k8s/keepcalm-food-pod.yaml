@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 
 metadata:
-  name: keepcalm-food-mlab-pod
+  name: keepcalm-food-pod
   labels:
     app: keepcalm-food
 spec:
@@ -13,12 +13,12 @@ spec:
     - name: MONGO_USER
       valueFrom:
         secretKeyRef:
-          name: mlab-secret
+          name: keepcalm-food-secret
           key: username
     - name: MONGO_PASSWORD
       valueFrom:
         secretKeyRef:
-          name: mlab-secret
+          name: keepcalm-food-secret
           key: password
     - name: SPRING_PROFILE
       value: "mlab"

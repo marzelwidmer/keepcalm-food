@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: keepcalm-food-mlab
+      app: keepcalm-food
   strategy:
     type: Recreate
   template:
@@ -24,12 +24,12 @@ spec:
           - name: MONGO_USER
             valueFrom:
               secretKeyRef:
-                name: mlab-secret
+                name: keepcalm-food-secret
                 key: username
           - name: MONGO_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: mlab-secret
+                name: keepcalm-food-secret
                 key: password
           - name: SPRING_PROFILE
             value: "mlab"
