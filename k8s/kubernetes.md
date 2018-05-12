@@ -91,11 +91,11 @@ Deployment
 
 - Update deployment
 
-    `kubectl apply -f deployment-mlab-v2.yml`
+    `kubectl apply -f keepcalm-food-deployment.yml`
 
 - Redepoy
 
-    `kubectl replace --force -f  mlab-pod.yaml`
+    `kubectl replace --force -f keepcalm-food-deployment.yml`
  
 
 
